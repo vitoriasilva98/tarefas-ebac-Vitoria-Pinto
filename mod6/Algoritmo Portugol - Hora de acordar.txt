@@ -1,28 +1,34 @@
-INÍCIO 
 	1. Ao acordar, desligo despertador do relógio e do celular;
 	2. Fico mais uns 10 minutos na cama acordando;
 	3. Levanto da cama;
 	4. Após levantar, abro a porta do quarto;
 	5. Fecho a porta do quarto;
-	6. Abro a porta do banheiro;
-	7. Faço minhas necessidades;
-	8. Cuido da minha higiene pessoal;
-	9. Abro a porta do escritório;
-	10. Fecho a porta;
-	11. Sento na cadeira;
-	12. Ligo o fio na tomada do notebook e monitor;
-	13. Ligo o notebook e monitor;
-	14. Levanto da cadeira;
-	15. Abro a porta;
-	16. Fecho a porta;
-	17. Vou para a cozinha e pego uma caneca;
-	18. Tem achocolatado no armário? Sim
+	6. Tem alguém no banheiro? Sim;
+		1. Aguardo a pessoa terminar de usar;
+		2. Entro no banheiro;
+		3. Fecho a porta;
+	7. Não;
+		1. Abro a porta do banheiro;
+		2. Entro no banheiro;
+		3. Fecho a porta;
+	8. Faço as minhas necessidades;
+	9. Cuido da minha higiene pessoal;
+	10. Abro a porta do escritório;
+	11. Fecho a porta;
+	12. Sento na cadeira;
+	13. Ligo o fio na tomada do notebook e monitor;
+	14. Ligo o notebook e monitor;
+	15. Levanto da cadeira;
+	16. Abro a porta;
+	17. Fecho a porta;
+	18. Vou para a cozinha e pego uma caneca;
+	19. Tem achocolatado no armário? Sim
 		1. Adiciono o pó na caneca;
 		2. Abro a porta da geladeira, pego o leite;
 		3. Coloco o leite na caneca;
 		4. Pego uma colher e misturo os ingredientes na caneca;
 		5. Após tirar a colher, bebo o chocolate;
-	19. Não
+	20. Não
 		1. Pego o capuccino no armário;
 		2. Abro a porta da geladeira, pego o leite;
 		3. Coloco o leite em um caneco;
