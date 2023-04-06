@@ -12,9 +12,9 @@ public class Main {
         Integer opcao;
         do {
             System.out.println("Deseja realizar o cáculo de média de um aluno? " +
-                                "\nDigite 1 - SIM \nDigite 2 - NÃO");
+                    "\nDigite 1 - SIM \nDigite 2 - NÃO");
             opcao = scanner.nextInt();
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     calculandoMedia(registrandoAluno(scanner));
                     break;
@@ -25,19 +25,16 @@ public class Main {
                     System.out.println("Número inválido!");
                     break;
             }
-        }while(opcao != 2);
-//        Aluno aluno1 = new Aluno(001, "João da Silva", "Matemática",
-//                5.5,6.0,7.8,9.0);
+        } while (opcao != 2);
     }
 
     /**
-     *
      * O método registra um aluno
      *
      * @param scanner
      * @return Aluno
      */
-    public static Aluno registrandoAluno(Scanner scanner){
+    public static Aluno registrandoAluno(Scanner scanner) {
         Aluno aluno = new Aluno();
 
         System.out.println("********************* EBAC: Registrando Aluno *********************");
@@ -45,34 +42,34 @@ public class Main {
         do {
             System.out.println("Digite a matrícula do aluno: ");
             aluno.setMatricula(scanner.nextInt());
-        }while(aluno.getMatricula() == 0 || aluno.getMatricula() == null || aluno.getMatricula() > 1000);
+        } while (aluno.getMatricula() == 0 || aluno.getMatricula() == null || aluno.getMatricula() > 1000);
 
         do {
             System.out.println("Digite o nome do aluno: ");
             aluno.setNome(scanner.nextLine().trim()); // O método trim remove os caracteres vázios
-        }while(aluno.getNome().equals(""));
+        } while (aluno.getNome().equals(""));
 
         do {
             System.out.println("Digite o nome da matéria: ");
             aluno.setMateria(scanner.nextLine().trim()); // O método trim remove os caracteres vázios
         } while (aluno.getMateria().equals(""));
 
-        do{
+        do {
             System.out.println("Digite a 1ª nota: ");
             aluno.setNota1(scanner.nextDouble());
         } while (aluno.getNota1() > 10);
 
-        do{
+        do {
             System.out.println("Digite a 2ª nota: ");
             aluno.setNota2(scanner.nextDouble());
         } while (aluno.getNota2() > 10);
 
-        do{
+        do {
             System.out.println("Digite a 3ª nota: ");
             aluno.setNota3(scanner.nextDouble());
         } while (aluno.getNota3() > 10);
 
-        do{
+        do {
             System.out.println("Digite a 4ª nota: ");
             aluno.setNota4(scanner.nextDouble());
         } while (aluno.getNota4() > 10);
@@ -82,7 +79,6 @@ public class Main {
     }
 
     /**
-     *
      * O método calcula a média do aluno
      *
      * @param aluno
@@ -92,7 +88,7 @@ public class Main {
         Double media = (aluno.getNota1() + aluno.getNota2() + aluno.getNota3() + aluno.getNota4()) / 4;
         String situacao;
 
-        if(media >= 7){
+        if (media >= 7) {
             situacao = " foi APROVADO(A)";
         } else if (media >= 5) {
             situacao = " está de RECUPERAÇÃO";
