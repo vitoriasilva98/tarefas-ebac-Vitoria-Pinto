@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Main {
+public class TarefaParte1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Integer quantidade;
