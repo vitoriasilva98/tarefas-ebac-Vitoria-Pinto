@@ -18,11 +18,13 @@ import javax.swing.table.DefaultTableModel;
 public class TelaCadastro extends javax.swing.JFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
-    
+
     private IClienteDAO iClienteDAO = new ClienteMapDAO();
-    
+
     private Long cpfSelecionado = null;
-    
+
+    private Integer linhaSelecionada = null;
+
     /**
      * Creates new form TelaCadastro
      */
@@ -30,7 +32,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         initComponents();
         this.initTableFields();
     }
-    
+
     private void initTableFields() {
         modelo.addColumn("Nome");
         modelo.addColumn("CPF");
@@ -39,10 +41,14 @@ public class TelaCadastro extends javax.swing.JFrame {
         modelo.addColumn("Numero");
         modelo.addColumn("Cidade");
         modelo.addColumn("Estado");
-        
+
         tabelaRegistros.setModel(modelo);
+
+        // Com essa linha só é possível selecionar uma linha na tabela
+        tabelaRegistros.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,11 +79,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         campoEstado = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaRegistros = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Nome:");
 
@@ -101,6 +109,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
 
         btnDelete.setText("Excluir");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Atualizar");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +170,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabelaRegistros);
 
+        jLabel8.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 153, 51));
+        jLabel8.setText("Cadastro de Cliente");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,27 +181,30 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campoNome)
-                            .addComponent(campoTel)
-                            .addComponent(campoEnd)
-                            .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel2)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoNome)
+                                    .addComponent(campoTel)
+                                    .addComponent(campoEnd)
+                                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +228,9 @@ public class TelaCadastro extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel8)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +259,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addComponent(btnUpdate)
                     .addComponent(btnSave))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -259,7 +281,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +302,8 @@ public class TelaCadastro extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(this, "Deseja sair do programa?", "Sair",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        if(result == JOptionPane.YES_NO_OPTION) {
+        
+        if (result == JOptionPane.YES_NO_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_menuSairActionPerformed
@@ -288,46 +311,52 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         Cliente cliente = this.createCliente();
-        
-        if(cliente != null) {         
-            
-            if(iClienteDAO.cadatrar(cliente)) {
-                modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf(), 
+
+        if (cliente != null) {
+
+            if (iClienteDAO.cadatrar(cliente)) {
+                modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf(),
                     cliente.getTelefone(), cliente.getEndereco(), cliente.getNumero(),
                     cliente.getCidade(), cliente.getEstado()});
-                
-                JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-                
+
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
                 this.fieldsClean();
             } else {
-                JOptionPane.showMessageDialog(null,"Cliente já cadastrado", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Cliente já cadastrado", "Alerta", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Dados inválidos");
+            JOptionPane.showMessageDialog(null, "Dados inválidos", "Alerta", JOptionPane.INFORMATION_MESSAGE);
         }
-        
-        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-       
-        
-//        Cliente cliente = this.createCliente();
-//        
-//        if(cliente != null) {         
-//            
-//            modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf(), 
-//                cliente.getTelefone(), cliente.getEndereco(), cliente.getNumero(),
-//                cliente.getCidade(), cliente.getEstado()});
-//                
-//            JOptionPane.showMessageDialog(null,"Atualização realizada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-//                
-//            this.fieldsClean();
-//
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Dados inválidos");
-//        }
+
+        Cliente cliente = this.createCliente();
+
+        if (cliente != null && linhaSelecionada != null) {
+
+            iClienteDAO.alterar(cliente);
+
+            // Remove a linha com os dados antigos
+            modelo.removeRow(linhaSelecionada);
+
+            // Adiciona os dados atualizados na mesma linha
+            modelo.insertRow(linhaSelecionada, new Object[]{cliente.getNome(), cliente.getCpf(),
+                cliente.getTelefone(), cliente.getEndereco(), cliente.getNumero(),
+                cliente.getCidade(), cliente.getEstado()});
+
+            // habilita o campo do CPF para que haja alterações
+            campoCpf.setEnabled(true);
+
+            JOptionPane.showMessageDialog(null, "Atualização realizada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+            this.fieldsClean();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Os dados estão inválidos");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void tabelaRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaRegistrosMouseClicked
@@ -335,12 +364,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         // Limpa os campos para não ter nenhum problema com os dados adicionado 
         //aos campos
         this.fieldsClean();
-        
+
         // Pega a linha clicada pelo usuário
-        int linhaSelecionada = tabelaRegistros.getSelectedRow();
-        
+        linhaSelecionada = tabelaRegistros.getSelectedRow();
+
         // Verifica se não é uma linha inexistente 
-        if(linhaSelecionada != -1) {
+        if (linhaSelecionada != -1) {
             // Entra na variável da tabela e no valor que está atribuído
             // Através do método getValueAt é possível acessar o valor desejado 
             // adicionando o número da linha que foi clicada e a posição do indice 
@@ -349,23 +378,59 @@ public class TelaCadastro extends javax.swing.JFrame {
             // Está sendo atribuído o valor do CPF a uma variavél global.
             cpfSelecionado = (Long) tabelaRegistros.getModel().getValueAt(linhaSelecionada, 1);
         }
-        
-        if(cpfSelecionado != null) {
+
+        if (cpfSelecionado != null) {
             // Busca os dados do cliente através CPF
             Cliente cliente = iClienteDAO.consultar(cpfSelecionado);
-            
-            if(cliente != null) {
+
+            if (cliente != null) {
                 campoNome.setText(cliente.getNome());
                 campoTel.setText(cliente.getTelefone().toString());
                 campoEnd.setText(cliente.getEndereco());
                 campoCidade.setText(cliente.getCidade());
                 campoCpf.setText(cliente.getCpf().toString());
                 campoNumero.setText(cliente.getNumero().toString());
-                campoEstado.getSelectedObjects();
+
+                // Lógica para saber qual é o indice que o combobox vai setar.
+                for (int i = 0; i < campoEstado.getModel().getSize(); i++) {
+                    if (cliente.getEstado().equals(campoEstado.getModel().getElementAt(i))) {
+                        campoEstado.setSelectedIndex(i);
+                        break;
+                    }
+                }
+
+                // desabilita o campo do CPF para que haja alterações
+                campoCpf.setEnabled(false);
             }
-            
         }
     }//GEN-LAST:event_tabelaRegistrosMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        Cliente cliente = iClienteDAO.consultar(cpfSelecionado);
+
+        if (cliente.getCpf() != null && linhaSelecionada != null) {
+
+            int result = JOptionPane.showConfirmDialog(this, 
+                    "Tem certeza que deseja excluir esse cliente?", "Excluir",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            
+            if (result == JOptionPane.YES_NO_OPTION) {
+                iClienteDAO.exluir(cliente.getCpf());
+
+                // Remove a linha com os dados antigos
+                modelo.removeRow(linhaSelecionada);
+
+                JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+                this.fieldsClean();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Cliente não encontrado na base de dados", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void fieldsClean() {
         campoNome.setText("");
@@ -375,37 +440,37 @@ public class TelaCadastro extends javax.swing.JFrame {
         campoCpf.setText("");
         campoNumero.setText("");
         campoEstado.setSelectedIndex(0);
+
+        campoCpf.setEnabled(true);
     }
-    
+
     private Cliente createCliente() {
-        
-        if(isDadosValidos()) {
-            return new Cliente(campoNome.getText(), campoCpf.getText(), 
-                campoTel.getText(), campoEnd.getText(), campoNumero.getText(),
-            campoCidade.getText(), campoEstado.getSelectedItem().toString());
+
+        if (isDadosValidos()) {
+            return new Cliente(campoNome.getText(), campoCpf.getText(),
+                    campoTel.getText(), campoEnd.getText(), campoNumero.getText(),
+                    campoCidade.getText(), campoEstado.getSelectedItem().toString());
         }
-//        campoEstado.getSelectedItem().toString()
-        
+
         return null;
     }
-    
+
     private Boolean isDadosValidos() {
-        
+
 //      Verifica se os campos não estão vázios
-        if(!campoNome.getText().isBlank() && 
-            !campoCpf.getText().isBlank() &&
-            !campoTel.getText().isBlank() && 
-            !campoNumero.getText().isBlank() &&
-            !campoCidade.getText().isBlank() &&
-            !campoEstado.getSelectedItem().toString().isBlank() &&
-            !campoEstado.getSelectedItem().toString().equals("Selecione:")) {
-            
-                return true;
+        if (!campoNome.getText().isBlank()
+                && !campoCpf.getText().isBlank()
+                && !campoTel.getText().isBlank()
+                && !campoNumero.getText().isBlank()
+                && !campoCidade.getText().isBlank()
+                && !campoEstado.getSelectedItem().toString().isBlank()
+                && !campoEstado.getSelectedItem().toString().equals("Selecione:")) {
+
+            return true;
         }
-        
+
         return false;
     }
-    
 
     /**
      * @param args the command line arguments
@@ -461,6 +526,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

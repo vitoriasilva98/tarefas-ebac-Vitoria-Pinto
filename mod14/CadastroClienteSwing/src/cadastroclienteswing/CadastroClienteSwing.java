@@ -1,8 +1,6 @@
 
 package cadastroclienteswing;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author Vitória Pinto
