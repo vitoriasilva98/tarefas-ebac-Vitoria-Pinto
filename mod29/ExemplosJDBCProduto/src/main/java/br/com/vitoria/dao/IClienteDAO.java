@@ -1,6 +1,6 @@
 package br.com.vitoria.dao;
 
-import br.com.vitoria.domain.Cliente;
+import br.com.vitoria.entity.Cliente;
 
 import java.util.List;
 

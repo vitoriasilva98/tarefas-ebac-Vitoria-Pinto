@@ -1,4 +1,4 @@
-package br.com.vitoria.domain;
+package br.com.vitoria.entity;
 
 public class Cliente {
 
