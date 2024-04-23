@@ -4,6 +4,8 @@ import br.com.vitoria.dao.factory.EstoqueFactory;
 import br.com.vitoria.dao.generic.GenericDAO;
 import br.com.vitoria.domain.Estoque;
 import br.com.vitoria.exceptions.DAOException;
+import br.com.vitoria.exceptions.MaisDeUmRegistroException;
+import br.com.vitoria.exceptions.TableException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -145,5 +147,36 @@ public class EstoqueDAO extends GenericDAO<Estoque, String> implements IEstoqueD
             throw new DAOException("ERRO CONSULTANDO OBJETO ", e);
         }
         return lista;
+    }
+
+    @Override
+    public Estoque consultar(String valor) throws MaisDeUmRegistroException, TableException, DAOException {
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT pro.id as ID_PRODUTO, pro.codigo, pro.nome, pro.descricao, pro.valor, pro.marca, est.id, est.unidade  ");
+        sql.append(" FROM TB_ESTOQUE est ");
+        sql.append(" INNER JOIN TB_PRODUTO pro ON pro.id = est.id_produto_fk ");
+        sql.append("WHERE est.id_produto_fk = ? ");
+        Connection connection = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+
+            connection = getConnection();
+            stm = connection.prepareStatement(sql.toString());
+            setParametrosQuerySelect(stm, valor);
+            rs = stm.executeQuery();
+            if (rs.next()) {
+                Estoque estoque = EstoqueFactory.convert(rs);
+                return estoque;
+            }
+
+        } catch (SQLException e) {
+            throw new DAOException("ERRO CONSULTANDO OBJETO ", e);
+        } finally {
+            closeConnection(connection, stm, rs);
+        }
+        return null;
+
     }
 }

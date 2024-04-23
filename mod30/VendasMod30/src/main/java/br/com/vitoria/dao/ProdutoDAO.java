@@ -2,11 +2,8 @@
 package br.com.vitoria.dao;
 
 import br.com.vitoria.dao.factory.ProdutoFactory;
-import br.com.vitoria.dao.factory.VendaFactory;
 import br.com.vitoria.dao.generic.GenericDAO;
-import br.com.vitoria.domain.Estoque;
 import br.com.vitoria.domain.Produto;
-import br.com.vitoria.domain.Venda;
 import br.com.vitoria.exceptions.DAOException;
 
 import java.sql.Connection;
