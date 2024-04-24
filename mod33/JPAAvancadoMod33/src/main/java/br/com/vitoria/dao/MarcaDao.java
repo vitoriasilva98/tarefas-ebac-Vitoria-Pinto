@@ -1,6 +1,6 @@
 package br.com.vitoria.dao;
 
-import br.com.vitoria.entity.Produto;
+import br.com.vitoria.entity.Marca;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class ProdutoDao implements IProdutoDao {
+public class MarcaDao implements IMarcaDao {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -28,53 +28,54 @@ public class ProdutoDao implements IProdutoDao {
     }
 
     @Override
-    public Produto cadastrar(Produto produto) {
+    public Marca cadastrar(Marca marca) {
         this.init();
-        entityManager.persist(produto);
+        entityManager.persist(marca);
         entityManager.getTransaction().commit();
         this.end();
 
-        return produto;
+        return marca;
     }
 
     @Override
-    public Produto consultar(Long proId) {
+    public Marca buscarMarcaPorNome(String marca) {
         this.init();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT p FROM Produto p ");
-        sb.append("WHERE p.proId = :proId");
+        sb.append("SELECT m FROM marca m ");
+        sb.append("WHERE m.nome = :marca");
 
-        TypedQuery<Produto> query = entityManager.createQuery(sb.toString(), Produto.class);
-        query.setParameter("proId", proId);
+        TypedQuery<Marca> query = entityManager.createQuery(sb.toString(), Marca.class);
+        query.setParameter("marca", marca);
 
-        Produto produto = query.getSingleResult();
+        Marca produto = query.getSingleResult();
         this.end();
 
         return produto;
     }
 
     @Override
-    public List<Produto> listarProdutos() {
+    public List<Marca> listarMarcas() {
         this.init();
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
-        Root<Produto> root = query.from(Produto.class);
+        CriteriaQuery<Marca> query = builder.createQuery(Marca.class);
+        Root<Marca> root = query.from(Marca.class);
         query.select(root);
 
-        TypedQuery<Produto> tpQuery = entityManager.createQuery(query);
-        List<Produto> list = tpQuery.getResultList();
+        TypedQuery<Marca> tpQuery = entityManager.createQuery(query);
+        List<Marca> list = tpQuery.getResultList();
 
         return list;
     }
 
     @Override
-    public void excluir(Produto produto) {
+    public void excluirMarca(Marca marca) {
         this.init();
-        produto = entityManager.merge(produto);
-        entityManager.remove(produto);
+        marca = entityManager.merge(marca);
+        entityManager.remove(marca);
         entityManager.getTransaction().commit();
         this.end();
     }
+
 }
