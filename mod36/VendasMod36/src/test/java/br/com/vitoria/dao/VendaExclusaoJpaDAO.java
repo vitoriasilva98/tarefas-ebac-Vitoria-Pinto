@@ -1,21 +1,19 @@
-/**
- * 
- */
+
 package br.com.vitoria.dao;
 
-import br.com.vitoria.dao.generic.jpa.GenericJpaDAO;
+import br.com.vitoria.dao.generic.jpa.GenericJpaDB1DAO;
 import br.com.vitoria.dao.jpa.IVendaJpaDAO;
-import br.com.vitoria.entity.jpa.VendaJpa;
+import br.com.vitoria.domain.jpa.VendaJpa;
 import br.com.vitoria.exceptions.DAOException;
 import br.com.vitoria.exceptions.TipoChaveNaoEncontradaException;
 
 /**
- * @author rodrigo.pires
+ * @author vitoria.vitoria
  *
  * Classe utilizada somente no teste para fazer a exclusão das vendas
  *
  */
-public class VendaExclusaoJpaDAO extends GenericJpaDAO<VendaJpa, Long> implements IVendaJpaDAO {
+public class VendaExclusaoJpaDAO extends GenericJpaDB1DAO<VendaJpa, Long> implements IVendaJpaDAO {
 
 	public VendaExclusaoJpaDAO() {
 		super(VendaJpa.class);
