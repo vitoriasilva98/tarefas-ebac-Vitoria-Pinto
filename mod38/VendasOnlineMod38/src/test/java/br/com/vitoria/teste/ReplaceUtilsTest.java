@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import br.com.rpires.utils.ReplaceUtils;
+import br.com.vitoria.utils.ReplaceUtils;
 
 /**
  * @author vitoria.vitoria
