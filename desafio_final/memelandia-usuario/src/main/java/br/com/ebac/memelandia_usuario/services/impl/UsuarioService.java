@@ -54,7 +54,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Usuario buscarUsuario(Long id) {
+    public Usuario buscarUsuarioPorId(Long id) {
         try {
             if(id == null) {
                 throw new UsuarioException("O id do usuário para pesquisa não pode ser nulo.");
@@ -63,7 +63,7 @@ public class UsuarioService implements IUsuarioService {
 
             return usuarioPesquisado.orElse(null);
         } catch (Exception ex) {
-            log.error("[MEMELANDIA][USUARIO][BUSCAR_USUARIO] Erro ao buscar usuario: {}", ex.getMessage());
+            log.error("[MEMELANDIA][USUARIO][BUSCAR_USUARIO_POR_ID] Erro ao buscar usuario: {}", ex.getMessage());
             throw new UsuarioException(ex);
         }
     }

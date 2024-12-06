@@ -8,6 +8,6 @@ public interface IUsuarioService {
 
     Usuario novoUsuario(Usuario usuario);
     List<Usuario> listarTodosUsuarios();
-    Usuario buscarUsuario(Long id);
+    Usuario buscarUsuarioPorId(Long id);
     Usuario buscarUsuarioPorEmail(String email);
 }

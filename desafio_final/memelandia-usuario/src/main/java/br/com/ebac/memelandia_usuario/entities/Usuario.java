@@ -32,7 +32,6 @@ public class Usuario {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     @Column(name = "data_cadastro", nullable = false)
     private Date dataCadastro;
 }
