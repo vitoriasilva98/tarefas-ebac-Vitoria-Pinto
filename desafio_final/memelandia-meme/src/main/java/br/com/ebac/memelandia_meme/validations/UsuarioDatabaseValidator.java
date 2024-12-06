@@ -14,7 +14,7 @@ public class UsuarioDatabaseValidator {
     private final UsuarioClient usuarioClient;
 
     public void verifiqueSeUsuarioExiste(Long usuarioId) {
-        Usuario usuarioEncontrado = usuarioClient.buscarUsuarioPorId(usuarioId);
+        Usuario usuarioEncontrado = usuarioClient.buscarUsuarioPorId(usuarioId).getBody();
 
         if(usuarioEncontrado == null) {
             throw new NoSuchElementException("Nenhum usuário foi encontrado na base de dados com esse id.");
