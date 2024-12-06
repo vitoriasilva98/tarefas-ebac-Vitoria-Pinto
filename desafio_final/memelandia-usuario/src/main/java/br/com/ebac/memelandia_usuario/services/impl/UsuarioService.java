@@ -6,6 +6,7 @@ import br.com.ebac.memelandia_usuario.repositories.IUsuarioRepository;
 import br.com.ebac.memelandia_usuario.services.IUsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,13 +21,13 @@ public class UsuarioService implements IUsuarioService {
     private final IUsuarioRepository repository;
 
     @Override
-    public Usuario novoUsuario(Usuario usuario) {
+    public ResponseEntity<Usuario> novoUsuario(Usuario usuario) {
         try {
             if(usuario == null) {
                 throw new UsuarioException("Usuário não pode ser nulo");
             }
 
-            Usuario usuarioPesquisado = buscarUsuarioPorEmail(usuario.getEmail());
+            Usuario usuarioPesquisado = buscarUsuarioPorEmail(usuario.getEmail()).getBody();
 
             if(usuarioPesquisado != null) {
                 if(usuarioPesquisado.getEmail().equals(usuario.getEmail())) {
@@ -36,7 +37,7 @@ public class UsuarioService implements IUsuarioService {
 
             usuario.setDataCadastro(new Date());
 
-            return repository.save(usuario);
+            return ResponseEntity.ok(repository.save(usuario));
         } catch (Exception ex) {
             log.error("[MEMELANDIA][USUARIO][NOVO_USUARIO] Erro ao criar novo usuario: {}", ex.getMessage());
             throw new UsuarioException(ex);
@@ -44,9 +45,9 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public List<Usuario> listarTodosUsuarios() {
+    public ResponseEntity<List<Usuario>> listarTodosUsuarios() {
         try {
-            return repository.findAll();
+            return ResponseEntity.ok(repository.findAll());
         } catch (Exception ex) {
             log.error("[MEMELANDIA][USUARIO][LISTAR_TODOS_USUARIOS] Erro ao listar todos os usuarios: {}", ex.getMessage());
             throw new UsuarioException(ex);
@@ -54,14 +55,14 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Usuario buscarUsuarioPorId(Long id) {
+    public ResponseEntity<Usuario> buscarUsuarioPorId(Long id) {
         try {
             if(id == null) {
                 throw new UsuarioException("O id do usuário para pesquisa não pode ser nulo.");
             }
             Optional<Usuario> usuarioPesquisado = repository.findById(id);
 
-            return usuarioPesquisado.orElse(null);
+            return ResponseEntity.ok(usuarioPesquisado.orElse(null));
         } catch (Exception ex) {
             log.error("[MEMELANDIA][USUARIO][BUSCAR_USUARIO_POR_ID] Erro ao buscar usuario: {}", ex.getMessage());
             throw new UsuarioException(ex);
@@ -69,14 +70,14 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Usuario buscarUsuarioPorEmail(String email) {
+    public ResponseEntity<Usuario> buscarUsuarioPorEmail(String email) {
         try {
             if(email == null || email.isBlank()) {
                 throw new UsuarioException("O id do usuário para pesquisa não pode ser nulo.");
             }
             Optional<Usuario> usuarioPesquisado = repository.findByEmail(email);
 
-            return usuarioPesquisado.orElse(null);
+            return ResponseEntity.ok(usuarioPesquisado.orElse(null));
         } catch (Exception ex) {
             log.error("[MEMELANDIA][USUARIO][BUSCAR_USUARIO_POR_EMAIL] Erro ao buscar usuario: {}", ex.getMessage());
             throw new UsuarioException(ex);
