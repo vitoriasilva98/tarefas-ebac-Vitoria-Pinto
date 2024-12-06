@@ -3,13 +3,26 @@ server:
   wait-time-in-ms-when-sync-empty: 3000
 
 spring:
+  spring:
+    profiles:
+      active: native
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:db-memelandia
     username: sa
     password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
   application:
     name: meme-service-memelandia
 
 custom:
   message: "Configuração centralizada para o Serviço do Meme."
+
+application:
+  usuarioServiceMemelandia:
+    url: http://localhost:8081
+    endpointConsultarUsuario: ${application.usuarioServiceMemelandia.url}/memelandia/usuario
+application-version: 2.0
