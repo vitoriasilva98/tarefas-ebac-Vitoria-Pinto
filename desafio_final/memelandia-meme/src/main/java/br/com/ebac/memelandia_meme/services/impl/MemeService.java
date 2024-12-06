@@ -29,6 +29,7 @@ public class MemeService implements IMemeService {
     @Override
     public ResponseEntity<Meme> novoMeme(Meme meme) {
         try {
+            log.info("[MEMELANDIA][MEME][NOVO_MEME] Iniciando criação do meme com nome: {}", meme.getNome());
             validarObjetoMeme(meme);
             usuarioDatabaseValidator.verifiqueSeUsuarioExiste(meme.getUsuarioId());
             verifiqueSeCategoriaMemeExiste(meme.getCategoriaMeme().getId());
@@ -44,6 +45,7 @@ public class MemeService implements IMemeService {
     @Override
     public ResponseEntity<Meme> buscarMemePorId(Long id) {
         try {
+            log.info("[MEMELANDIA][MEME][BUSCAR_MEME_POR_ID] Iniciando do meme pelo id: {}", id);
             if(id == null) {
                 throw new MemeException("O id do meme para pesquisa não pode ser nulo.");
             }
@@ -60,6 +62,7 @@ public class MemeService implements IMemeService {
     @Override
     public ResponseEntity<List<Meme>> listarTodosMemes() {
         try {
+            log.info("[MEMELANDIA][MEME][LISTAR_TODAS_AS_MEME] Iniciando listagem de memes");
             return ResponseEntity.ok(repository.findAll());
         } catch (Exception ex) {
             log.error("[MEMELANDIA][MEME][LISTAR_TODAS_AS_MEME] Erro ao listar todos os meme: {}", ex.getMessage());
@@ -70,6 +73,7 @@ public class MemeService implements IMemeService {
     @Override
     public ResponseEntity<Meme> buscarMemePorNome(String nome) {
         try {
+            log.info("[MEMELANDIA][MEME][BUSCAR_MEME_POR_ID] Iniciando do meme pelo nome: {}", nome);
             if(nome.isBlank()) {
                 throw new MemeException("O id não pode ser nulo ou vázio");
             }
@@ -82,7 +86,7 @@ public class MemeService implements IMemeService {
 
             return ResponseEntity.ok(memeEncontrado);
         } catch (Exception ex) {
-            log.error("[MEMELANDIA][MEME][BUSCAR_CATEGORIA_POR_NOME] Erro ao buscar meme por nome: {}", ex.getMessage());
+            log.error("[MEMELANDIA][MEME][BUSCAR_MEME_POR_NOME] Erro ao buscar meme por nome: {}", ex.getMessage());
             throw new MemeException(ex.getMessage());
         }
     }

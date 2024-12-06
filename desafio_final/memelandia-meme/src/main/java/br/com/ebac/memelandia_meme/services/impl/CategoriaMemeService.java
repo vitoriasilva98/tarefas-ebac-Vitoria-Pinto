@@ -28,6 +28,7 @@ public class CategoriaMemeService implements ICategoriaMemeService {
     @Override
     public ResponseEntity<CategoriaMeme> novaCategoriaMeme(CategoriaMeme categoria) {
         try {
+            log.info("[MEMELANDIA][CATEGORIA_MEME][NOVA_CATEGORIA_MEME] Iniciando criação da categoria de meme do nome: {}", categoria.getNome());
             validarObjetoCategoriaMeme(categoria);
             usuarioDatabaseValidator.verifiqueSeUsuarioExiste(categoria.getUsuarioId());
 
@@ -43,7 +44,7 @@ public class CategoriaMemeService implements ICategoriaMemeService {
     @Override
     public ResponseEntity<CategoriaMeme> buscarCategoriaMemePorId(Long id) {
         try {
-
+            log.info("[MEMELANDIA][CATEGORIA_MEME][BUSCAR_CATEGORIA_POR_ID] Iniciando busca da categoria meme pelo id: {}", id);
             if(id == null) {
                 throw new MemeException("O id não pode ser nulo");
             }
@@ -64,6 +65,8 @@ public class CategoriaMemeService implements ICategoriaMemeService {
     @Override
     public ResponseEntity<List<CategoriaMeme>> listarTodasCategorias() {
         try {
+            log.info("[MEMELANDIA][CATEGORIA_MEME][LISTAR_TODAS_AS_CATEGORIAS] Iniciando listagem das categorias de meme");
+
             return ResponseEntity.ok(repository.findAll());
         }catch (Exception ex) {
             log.error("[MEMELANDIA][CATEGORIA_MEME][LISTAR_TODAS_AS_CATEGORIAS] Erro ao listar todas as categorias de meme: {}", ex.getMessage());
@@ -74,6 +77,7 @@ public class CategoriaMemeService implements ICategoriaMemeService {
     @Override
     public ResponseEntity<CategoriaMeme> buscarCategoriaMemePorNome(String nome) {
         try {
+            log.info("[MEMELANDIA][CATEGORIA_MEME][BUSCAR_CATEGORIA_POR_NOME] Iniciando busca da categoria meme pelo nome: {}", nome);
 
             if(nome.isBlank()) {
                 throw new MemeException("O id não pode ser nulo ou vázio");
@@ -93,6 +97,7 @@ public class CategoriaMemeService implements ICategoriaMemeService {
     }
 
     private void validarObjetoCategoriaMeme(CategoriaMeme categoria) {
+
         if(categoria == null) {
             throw new MemeException("A CategoriaMeme não pode ser nulo");
         }

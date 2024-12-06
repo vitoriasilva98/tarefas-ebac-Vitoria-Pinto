@@ -23,6 +23,8 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public ResponseEntity<Usuario> novoUsuario(Usuario usuario) {
         try {
+            log.info("[MEMELANDIA][USUARIO][NOVO_USUARIO] Iniciando criação do usuário: {}", usuario.getEmail());
+
             if(usuario == null) {
                 throw new UsuarioException("Usuário não pode ser nulo");
             }
@@ -47,6 +49,8 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public ResponseEntity<List<Usuario>> listarTodosUsuarios() {
         try {
+            log.info("[MEMELANDIA][USUARIO][LISTAR_TODOS_USUARIOS] Iniciando listagem de todos os usuários");
+
             return ResponseEntity.ok(repository.findAll());
         } catch (Exception ex) {
             log.error("[MEMELANDIA][USUARIO][LISTAR_TODOS_USUARIOS] Erro ao listar todos os usuarios: {}", ex.getMessage());
@@ -57,6 +61,7 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public ResponseEntity<Usuario> buscarUsuarioPorId(Long id) {
         try {
+            log.info("[MEMELANDIA][USUARIO][BUSCAR_USUARIO_POR_ID] Iniciando busca do usuário pelo id: {}", id);
             if(id == null) {
                 throw new UsuarioException("O id do usuário para pesquisa não pode ser nulo.");
             }
@@ -72,6 +77,8 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public ResponseEntity<Usuario> buscarUsuarioPorEmail(String email) {
         try {
+            log.info("[MEMELANDIA][USUARIO][BUSCAR_USUARIO_POR_EMAIL] Iniciando busca do usuário pelo email: {}", email);
+
             if(email == null || email.isBlank()) {
                 throw new UsuarioException("O id do usuário para pesquisa não pode ser nulo.");
             }
