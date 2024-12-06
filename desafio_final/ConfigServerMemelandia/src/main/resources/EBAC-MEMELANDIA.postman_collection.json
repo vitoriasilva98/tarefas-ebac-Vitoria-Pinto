@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "12d49b31-04e9-486b-9c0d-fc5f3e46ef69",
+		"name": "EBAC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Memelandia",
+			"item": [
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "/listar-todos-usuarios",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/memelandia/usuario/listar-todos-usuarios",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"memelandia",
+										"usuario",
+										"listar-todos-usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/memelandia/usuario/buscar-usuario-por-id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"memelandia",
+										"usuario",
+										"buscar-usuario-por-id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/novo-usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Vitória\",\n    \"email\": \"vitoria@email.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/memelandia/usuario/novo-usuario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"memelandia",
+										"usuario",
+										"novo-usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/buscar-usuario-por-email",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "vitoria@email.com",
+									"options": {
+										"raw": {
+											"language": "text"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8081/memelandia/usuario/buscar-usuario-por-email",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"memelandia",
+										"usuario",
+										"buscar-usuario-por-email"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Meme",
+					"item": [
+						{
+							"name": "/novo-meme",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"Dia do Profissional de T.I.\",\n    \"descricao\": \"Conserta minha impressora\",\n    \"urlLink\": \"https://cdn.prod.website-files.com/60c2442d9e9ea54746705c7a/60c2442d9e9ea57b82706050_5e5951cf3ba6dce7551ea53b_Dia%2520do%2520profissional%2520de%2520ti%2520meme%25209.jpeg\",\n    \"categoriaMeme\": {\n        \"id\": 1\n    },\n    \"usuarioId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/memelandia/meme/novo-meme",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"memelandia",
+										"meme",
+										"novo-meme"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/listar-todos-memes",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/memelandia/meme/listar-todos-memes",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"memelandia",
+										"meme",
+										"listar-todos-memes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CategoriaMeme",
+					"item": [
+						{
+							"name": "/nova-categoria",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"T.I.\",\n    \"descricao\": \"Memes da área da tecnologia\",\n    \"usuarioId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/memelandia/categoria-meme/nova-categoria",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"memelandia",
+										"categoria-meme",
+										"nova-categoria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/buscar-categoria-por-id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/memelandia/categoria-meme/buscar-categoria-por-id/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"memelandia",
+										"categoria-meme",
+										"buscar-categoria-por-id",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/listar-todas-categorias",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/memelandia/categoria-meme/listar-todas-categorias",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"memelandia",
+										"categoria-meme",
+										"listar-todas-categorias"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
